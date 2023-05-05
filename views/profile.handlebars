@@ -1,0 +1,36 @@
+<section class='container'>
+  <h1 class='profile-name'>{{profile.name}}</h1>
+  <h2 class='profile-email'>{{profile.email}}</h2>
+  <section class='flex-row justify-center'>
+    {{#each profile.projects as |project|}}
+      <section class='card'>
+        <a href='/project/{{project.id}}'>
+          <header>{{project.name}}</header>
+          <div class='card-body'>
+            <p class='project-description'>{{project.description}}</p>
+            <p class='project-created'>Created: {{project.date_created}}</p>
+            <p class='project-funding'>Funding needed: ${{project.needed_funding}}</p>
+          </div>
+        </a>
+      </section>
+    {{/each}}
+  </section>
+  <section class='flex-row justify-center'>
+    <form>
+      <label for='project-name'>Project Name:</label>
+      <input type='text' id='project-name' name='project-name' required />
+
+      <label for='project-description'>Project Description:</label>
+      <textarea
+        id='project-description'
+        name='project-description'
+        required
+      ></textarea>
+
+      <label for='needed-funding'>Needed Funding:</label>
+      <input type='number' id='needed-funding' name='needed-funding' required />
+
+      <button type='submit'>Submit</button>
+    </form>
+  </section>
+</section>
