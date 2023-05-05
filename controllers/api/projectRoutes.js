@@ -17,7 +17,10 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const projects = await Project.findAll();
-    res.status(200).json(projects);
+
+    const manyProjects = projects.get({ plain: true });
+
+    res.render('project', { manyProjects });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -28,12 +31,16 @@ router.get('/:id', async (req, res) => {
     const projectid = await Project.findByPk(req.params.id, {
     });
 
+    
+    const project = projectid.get({ plain: true });
+
+    res.render('project', { project });
+
     if (!projectid) {
       res.status(404).json({ message: 'Project Not Found' });
       return;
     }
 
-    res.status(200).json(projectid);
   } catch (err) {
     res.status(500).json(err);
   }
