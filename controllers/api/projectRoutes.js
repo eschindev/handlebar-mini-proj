@@ -14,6 +14,22 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const projectid = await Project.findByPk(req.params.id, {
+    });
+
+    if (!projectid) {
+      res.status(404).json({ message: 'Project Not Found' });
+      return;
+    }
+
+    res.status(200).json(projectid);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.delete('/:id', async (req, res) => {
   try {
     const projectData = await Project.destroy({
