@@ -5,10 +5,8 @@ const projectFormHandler = async (event) => {
   const projectDescription = document
     .querySelector('#project-description')
     .value.trim();
-  const projectFunding = document
-    .querySelector('#project-funding')
-    .value.trim();
-  const projectCreated = Date.now();
+  const projectFunding = document.querySelector('#needed-funding').value;
+  const projectCreated = new Date(Date.now());
 
   if (projectName && projectDescription && projectFunding) {
     const response = await fetch('/api/projects', {

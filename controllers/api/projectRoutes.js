@@ -4,7 +4,10 @@ const { Project } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     const newProject = await Project.create({
-      ...req.body,
+      name: req.body.projectName,
+      description: req.body.projectDescription,
+      date_created: req.body.projectCreated,
+      needed_funding: req.body.projectFunding,
       user_id: req.session.user_id,
     });
 
@@ -16,8 +19,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const projectid = await Project.findByPk(req.params.id, {
-    });
+    const projectid = await Project.findByPk(req.params.id, {});
 
     if (!projectid) {
       res.status(404).json({ message: 'Project Not Found' });
